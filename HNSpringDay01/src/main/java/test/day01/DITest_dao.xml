@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- OracleDao 를 생성해라 -->
+	<bean name="daoOra" class="test.day01.dao.impl.OracleDao"/>	
+
+	<!-- MssqlDao 를 생성해라 -->
+	<bean name="daoMy" class="test.day01.dao.impl.MssqlDao"/>
+
+	<!-- MyController 를 생성하고 OracleDao 를 주입해라.  -->
+	<bean name="controller" class="test.day01.controller.MyController">
+		<!--  위에서 생성한 daoOra 를 멤버변수 dao 에 주입해라. -->
+		<!-- value = 문자열 , ref = 객체 참조값 -->
+		<!-- <property name="dao" ref="daoOra"/> -->
+		<property name="dao" ref="daoMy"/>
+	</bean>
+
+	<!-- 
+			[[ scope 속성 ]]
+
+			- 스프링은 기본적으로 객체를 싱글톤객체로 생성한다.
+
+			- singleton : 객체를 하나만 생성(싱글톤 객체로 생성)
+
+			- prototype : 객체를 사용할때마다 생성
+
+			- request : 클라이언트가 요청할때마다 생성 ( WebApp 에서만 사용 )
+
+			- session : 세션에서만 가능 ( WebApp 에서만 사용 )
+	 -->
+
+	<bean name="oracleDao" class="test.day01.dao.impl.OracleDao" scope="prototype">
+	</bean>
+
+</beans>
