@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Battery 를 생성해라 -->
+	<bean name="nomalBattery" class="hunet.day01.dao.impl.NomalBattery"/>	
+	<bean name="rapidBattery" class="hunet.day01.dao.impl.RapidBattery"/>
+		
+
+	<!-- Phone 를 생성해라 -->
+	<bean name="gal3" class="hunet.day01.service.impl.Galaxy3" >
+		<constructor-arg ref="nomalBattery"></constructor-arg>
+	</bean>
+	<bean name="galNote7" class="hunet.day01.service.impl.GalaxyNote7">
+		<constructor-arg ref="rapidBattery"></constructor-arg>
+	</bean>
+	<bean name="IPhone" class="hunet.day01.service.impl.IPhone">
+		<constructor-arg ref="rapidBattery"></constructor-arg>
+	</bean>
+
+
+	<!-- MyController 를 생성하고 OracleDao 를 주입해라.  -->
+	<bean name="controller" class="hunet.day01.controller.PhoneController" scope="prototype">		
+		<property name="phone" ref="gal3"/>
+	</bean>
+	
+	<bean name="iphoneController" class="hunet.day01.controller.IPhoneController" scope="prototype">		
+		<property name="iphone" ref="IPhone"/>
+	</bean>
+
+
+
+</beans>
